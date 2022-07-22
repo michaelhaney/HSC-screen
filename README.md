@@ -1,6 +1,6 @@
 ## HSC Knockouts
 
-Live demo at: [http://www.hematopoiesiscrisprscreens.com/](hematopoiesiscrisprscreens.com)
+Live demo at: [hematopoiesiscrisprscreens.com](http://www.hematopoiesiscrisprscreens.com/)
 
 Citation: Haney et. al. 2022 bioRxiv
 
