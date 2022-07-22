@@ -1,6 +1,10 @@
 ## HSC Knockouts
 
-<!-- ### To Run
+Live demo at: [http://www.hematopoiesiscrisprscreens.com/](hematopoiesiscrisprscreens.com)
+
+Citation: Haney et. al. 2022 bioRxiv
+
+### To Run
 
 Download a copy of this repo, either through git or by clicking on the `Code > Download Zip` button at the top of this page.
 
@@ -16,11 +20,8 @@ Then open a web browser and paste the following url:
 http://localhost:8000/dist/
 ```
 
-You should see the webpage load. -->
+You should see the webpage load.
 
-### File Structure
-
-All 
 
 ### Development
 
