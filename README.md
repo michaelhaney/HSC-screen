@@ -17,7 +17,7 @@ python -m SimpleHTTPServer
 Then open a web browser and paste the following url:
 
 ```
-http://localhost:8000/dist/
+http://localhost:8000
 ```
 
 You should see the webpage load.
