@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<title>HSC Screens</title>
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="dependencies/notyf.min.css">
+		<link rel="stylesheet" href="dependencies/uikit.min.css">
+		<link rel="stylesheet" href="css/main.css">
+		<script src="dependencies/uikit.min.js"></script>
+		<script src="dependencies/uikit-icons.min.js"></script>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-HY0B80MXK9"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-HY0B80MXK9');
+		</script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+				<nav class="uk-navbar-container" uk-navbar>
+					<div class="uk-navbar-left">
+						<ul class="uk-navbar-nav">
+							<li class="uk-active">
+								Hematopoiesis CRISPR Screens
+							</li>
+						</ul>
+					</div>
+					<div class=uk-navbar-center>
+						<div class="uk-navbar-item uk-active">
+							<form class="uk-search uk-search-default">
+								<span uk-search-icon></span>
+								<input id="geneSearch" class="uk-search-input" type="search" placeholder="Search Gene Name">
+							</form>
+						</div>
+					</div>
+					<div class="uk-navbar-right">
+						<ul class="uk-navbar-nav">
+							<li class="uk-active">
+								<a href="#modal-about" uk-toggle>About</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+			<div id="citation">Citation: Haney <i>et. al.</i> 2022 bioRxiv</div>
+			<img id="visualAbstract" src="docs/abstract.jpg" alt="visual abstract for HSC knockout screen">
+			<div id='extraPlots'></div>
+			<div id='volcanoPlots'></div>
+			<div id='volcanoComparePlots'></div>
+			<div id="footer">
+				<span id="version"></span>
+			</div>
+		</div>
+		<div id="modal-about" uk-modal>
+			<div class="uk-modal-dialog uk-modal-body">
+				<button class="uk-modal-close-default" type="button" uk-close></button>
+				<h2 class="uk-modal-title">About</h2>
+				<p>
+					We performed CRISPR KO screens in 3-week expanded primary mouse HSCs by targeting ~7,000 genes in the functional categories of transcription factors, kinases, phosphatases, known drug targets and genes associated with apoptosis and cancer.
+					To target these ~7,000 genes, we used a 10 sgRNA/gene sgRNA library with ~70,000 gene targeting sgRNAs and ~5,000 control sgRNAs.
+					We transplanted ~17x10<sup>6</sup> day-14 CRISPR library cells into 17 lethally irradiated mice, which resulted in high level multi-lineage donor peripheral blood chimerism.
+					After 10-weeks, bone marrow and spleen from these mice were collected and pooled before various hematopoietic cell types purified for sgRNA sequencing: c-Kit<sup>+</sup>Sca1<sup>+</sup>Lineage<sup>-</sup> HSCs, Mac1/Gr1<sup>+</sup> myeloid cells, CD4/CD8<sup>+</sup> T cells, B220<sup>+</sup> B cells, and Ter119<sup>+</sup> erythroid cells.
+					This enabled four pairwise screen comparisons of various HSC-derived blood cells for putative regulators of hematopoiesis revealing genetic regulators of the lineage trajectory from HSCs to myeloid cells, T-cells, B-cells and erythroid cells.
+				</p>
+				<p>
+					See Haney <i>et. al.</i> 2022 bioRxiv for more details.
+				</p>
+			</div>
+		</div>
+		<script src="dist/index.js"></script>
+	</body>
+</html>
