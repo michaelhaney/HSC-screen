@@ -2,3 +2,5 @@ node_modules/
 *.DS_Store
 deploy.sh
 data/Volcano_combined_HSC_T14vHSPC.csv
+dist/index.js.LICENSE.txt
+dist/*.map
