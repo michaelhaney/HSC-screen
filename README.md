@@ -2,7 +2,7 @@
 
 Live demo at: [hematopoiesiscrisprscreens.com](http://www.hematopoiesiscrisprscreens.com/)
 
-Citation: Haney et. al. 2022 bioRxiv
+Citation: [Haney et. al. 2022 bioRxiv](https://biorxiv.org/cgi/content/short/2022.07.22.501030v1)
 
 ### To Run
 
