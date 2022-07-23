@@ -30,7 +30,11 @@ nav {
 }
 
 #citation {
-	text-align: center;
+	text-align: left;
+	max-width: 1020px;
+	width: 100%;
+	margin: auto;
+	padding-left: 10px;
 }
 
 #volcanoPlots, #volcanoComparePlots, #extraPlots {
