@@ -8,12 +8,12 @@ import { VolcanoComparePlot } from './VolcanoComparePlot';
 // $('#version').append(`Version ${require('../package.json').version}`);
 
 // Load data.
-const HSPC_vs_Tcell = '../data/Volcano_combined_HSPCvTcells_01_12_22.csv';
-const HSPC_vs_Bcell = '../data/Volcano_combined_HSPCvBcells_01_12_22.csv';
-const HSPC_vs_Myeloid = '../data/Volcano_combined_HSPCvMyeloid_01_12_22.csv';
-const HSPC_vs_Erythroid = '../data/Volcano_combined_HSPCvErythroid_01_12_22.csv';
-const HSPC_vs_Lymphoid = '../data/ACOC_DTKP_GE_LymphoidvHSPC_1.csv';
-const HSPC_vs_AllMyeloid = '../data/ACOC_DTKP_GE_allMyloidvHSPC_1.csv';
+const HSPC_vs_Tcell = './data/Volcano_combined_HSPCvTcells_01_12_22.csv';
+const HSPC_vs_Bcell = './data/Volcano_combined_HSPCvBcells_01_12_22.csv';
+const HSPC_vs_Myeloid = './data/Volcano_combined_HSPCvMyeloid_01_12_22.csv';
+const HSPC_vs_Erythroid = './data/Volcano_combined_HSPCvErythroid_01_12_22.csv';
+const HSPC_vs_Lymphoid = './data/ACOC_DTKP_GE_LymphoidvHSPC_1.csv';
+const HSPC_vs_AllMyeloid = './data/ACOC_DTKP_GE_allMyloidvHSPC_1.csv';
 import { searchGene } from './search';
 
 volcanoPlots.push(new VolcanoPlot({ url: HSPC_vs_Bcell, title: 'HSPC vs Bcell' }));
