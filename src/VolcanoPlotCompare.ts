@@ -18,7 +18,7 @@ type VolcanoCompareOptions = {
 
 const VOLCANO_COMPARE_PLOT = 'volcanoComparePlot';
 
-export class VolcanoComparePlot {
+export class VolcanoPlotCompare {
 	private readonly element: HTMLDivElement;
 	private readonly options: VolcanoCompareOptions;
 	private genes?: string[];
@@ -55,9 +55,8 @@ export class VolcanoComparePlot {
 			castleEffects2,
 			castlePValues2,
 			castlePValues2Log10,
-			colors,
-			highlightedIndices,
-			partiallyHighlightedIndices,
+			// highlightedIndices,
+			// partiallyHighlightedIndices,
 		} = await getVolcanoCompareData(url1, url2);
 
 		this.genes = genes;
@@ -84,7 +83,7 @@ ${title2} Effect Score: <b>%{customdata[1]:.2f}</b>
 			type: "scattergl",
 			mode: "markers",
 			marker: {
-				color: colors,
+				color: 'rgba(0,0,0,0.2)',
 			},
 			x: castlePValues1Log10,
 			y: castlePValues2Log10,
@@ -148,8 +147,8 @@ ${title2} Effect Score: <b>%{customdata[1]:.2f}</b>
 
 		Plotly.newPlot(element, [
 			data,
-			getHighlightedData(highlightedIndices, 'rgb(170, 0, 200)'),
-			getHighlightedData(partiallyHighlightedIndices, 'rgb(230, 180, 255)'),
+			// getHighlightedData(highlightedIndices, 'rgb(170, 0, 200)'),
+			// getHighlightedData(partiallyHighlightedIndices, 'rgb(230, 180, 255)'),
 		], layout, PLOTLY_CONFIG);
 
 		bindSearchToPlot(element);

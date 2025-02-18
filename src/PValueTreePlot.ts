@@ -81,7 +81,6 @@ export class PValueTreePlot {
 			});
 		}
 		
-
 		Object.keys(data).forEach(cellName => {
 			const value = data[cellName];
 			if (value < minVal) minVal = value;

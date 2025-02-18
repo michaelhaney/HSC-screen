@@ -1,6 +1,6 @@
 // TODO: https://getuikit.com/v2/docs/autocomplete.html
 
-import { barPlot, treePlot, volcanoComparePlots, volcanoPlots } from './globals';
+import { volcanoPlotsCompare, volcanoPlots, volcanoPlotsExpression } from './globals';
 
 const searchInput = document.getElementById('geneSearch') as HTMLInputElement;
 
@@ -15,9 +15,10 @@ searchInput.addEventListener('keypress', (e: KeyboardEvent) => {
 export function searchGene(_gene?: string, searchBar?: boolean, mouseClick?: boolean) {
 	if (!_gene || _gene.trim() === '') {
 		volcanoPlots.forEach(plot => plot.hideAnnotations());
-		volcanoComparePlots.forEach(plot => plot.hideAnnotations());
-		barPlot.hide();
-		treePlot.hide();
+		volcanoPlotsCompare.forEach(plot => plot.hideAnnotations());
+		volcanoPlotsExpression.forEach(plot => plot.hideAnnotations());
+		// barPlot.hide();
+		// treePlot.hide();
 		return;
 	}
 	const gene = _gene.toLowerCase().trim();
@@ -36,9 +37,10 @@ export function searchGene(_gene?: string, searchBar?: boolean, mouseClick?: boo
 	}
 
 	const values = volcanoPlots.map(plot => plot.annotateGene(gene));
-	volcanoComparePlots.forEach(plot => plot.annotateGene(gene));
-	barPlot.update(values, _gene);
-	treePlot.update(values, _gene);
+	volcanoPlotsCompare.forEach(plot => plot.annotateGene(gene));
+	volcanoPlotsExpression.forEach(plot => plot.annotateGene(gene));
+	// barPlot.update(values, _gene);
+	// treePlot.update(values, _gene);
 }
 
 export function bindSearchToPlot(element: HTMLDivElement) {

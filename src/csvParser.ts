@@ -4,6 +4,9 @@ import * as Papa from 'papaparse';
 export const VOLCANO_GENE = 'Symbol';
 export const VOLCANO_CASTLE_EFFECT = 'casTLE_Effect';
 export const VOLCANO_CASTLE_P_VALUE = 'pvalue';
+export const VOLCANO_EXPRESSION_GENE = 'gene';
+
+const loadedCSVs: {[key: string] : RowData[]} = {};
 
 const P_VALUE_THRESHOLD = 0.05;
 
@@ -34,6 +37,46 @@ async function parseCSV(url: string) {
 	});
 }
 
+export async function getVolcanoExpressionData(url: string, pName: string, effName: string) {
+	const csv = loadedCSVs[url] ? loadedCSVs[url] : await parseCSV(url);
+	loadedCSVs[url] = csv;
+	const genes: string[] = [];
+	const genesLowerCase: string[] = [];
+	const castleEffects: number[] = [];
+	const castlePValuesLog10: number[] = [];
+	const castlePValues: number[] = [];
+	// Calculate colors of data points by thresholding all p-values less than 0.05.
+	const colors: number[] = [];
+	for (let i = 0; i < csv.length; i++) {
+		const datum = csv[i] as any as { [key: string]: string | number};
+		let gene = datum[VOLCANO_EXPRESSION_GENE] as string;
+		// Fix gene name so only the first letter is capitalized.
+		gene = gene[0].toUpperCase() + gene.slice(1).toLowerCase();
+		genes.push(gene);
+		genesLowerCase.push(gene.toLowerCase());
+		const effect = datum[effName] as number;
+		castleEffects.push(effect);
+		const pValue = datum[pName] as number;
+		castlePValues.push(pValue);
+		const log10PValue = -Math.log10(pValue);
+		castlePValuesLog10.push(log10PValue);
+		let color = 0;
+		// if (pValue < P_VALUE_THRESHOLD) {
+		// 	if (effect < 0) color = -1;
+		// 	else color = 1;
+		// }
+		colors.push(color);
+	}
+	return {
+		genes,
+		genesLowerCase,
+		castleEffects,
+		castlePValues,
+		castlePValuesLog10,
+		colors,
+	};
+}
+
 export async function getVolcanoData(url: string) {
 	const csv = await parseCSV(url);
 	const genes: string[] = [];
@@ -56,12 +99,12 @@ export async function getVolcanoData(url: string) {
 		castlePValues.push(pValue);
 		const log10PValue = -Math.log10(pValue);
 		castlePValuesLog10.push(log10PValue);
-		let color = 0;
-		if (pValue < P_VALUE_THRESHOLD) {
-			if (effect < 0) color = -1;
-			else color = 1;
-		}
-		colors.push(color);
+		// let color = 0;
+		// if (pValue < P_VALUE_THRESHOLD) {
+		// 	if (effect < 0) color = -1;
+		// 	else color = 1;
+		// }
+		// colors.push(color);
 	}
 	return {
 		genes,
@@ -129,38 +172,38 @@ export async function getVolcanoCompareData(url1: string, url2: string) {
 	// Calculate colors of data points by thresholding all p-values less than 0.05.
 	const log10threshold = -Math.log10(P_VALUE_THRESHOLD);
 	const colors: number[] = [];
-	for (let i = 0; i < genes.length; i++) {
-		const gene = genes[i];
-		const index1 = genes1Hash[gene];
-		const index2 = genes2Hash[gene];
-		const datum1 = csv1[index1];
-		const datum2 = csv2[index2];
-		const pValue1 = datum1[VOLCANO_CASTLE_P_VALUE];
-		const effect1 = datum1[VOLCANO_CASTLE_EFFECT];
-		const pValue2 = datum2[VOLCANO_CASTLE_P_VALUE];
-		const effect2 = datum2[VOLCANO_CASTLE_EFFECT];
-		const pThreshold1 = pValue1 < P_VALUE_THRESHOLD;
-		const pThreshold2 = pValue2 < P_VALUE_THRESHOLD;
-		let color = 0;
-		if (pThreshold1) {
-			if (effect1 < 0) color += -0.5;
-			else color += 0.5;
-		}
-		if (pThreshold2) {
-			if (effect2 < 0) color += -0.5;
-			else color += 0.5;
-		}
-		colors.push(color);
-		// Check for genes with opposite signed effect scores.
-		if ((pThreshold1 && pThreshold2 && color === 0)) {
-			highlightedIndices.push(i);
-		} else if (
-			// (Math.sqrt(log10PValue1 * log10PValue1 + log10PValue2 * log10PValue2) > log10threshold && (Math.sign(effect1) === -Math.sign(effect2)))
-			(pValue1 < 2 * P_VALUE_THRESHOLD && pValue2 < 2 * P_VALUE_THRESHOLD && (Math.sign(effect1) === -Math.sign(effect2)))
-		) {
-			partiallyHighlightedIndices.push(i);
-		}
-	}
+	// for (let i = 0; i < genes.length; i++) {
+	// 	const gene = genes[i];
+	// 	// const index1 = genes1Hash[gene];
+	// 	// const index2 = genes2Hash[gene];
+	// 	// const datum1 = csv1[index1];
+	// 	// const datum2 = csv2[index2];
+	// 	// const pValue1 = datum1[VOLCANO_CASTLE_P_VALUE];
+	// 	// const effect1 = datum1[VOLCANO_CASTLE_EFFECT];
+	// 	// const pValue2 = datum2[VOLCANO_CASTLE_P_VALUE];
+	// 	// const effect2 = datum2[VOLCANO_CASTLE_EFFECT];
+	// 	// const pThreshold1 = pValue1 < P_VALUE_THRESHOLD;
+	// 	// const pThreshold2 = pValue2 < P_VALUE_THRESHOLD;
+	// 	// let color = 0;
+	// 	// if (pThreshold1) {
+	// 	// 	if (effect1 < 0) color += -0.5;
+	// 	// 	else color += 0.5;
+	// 	// }
+	// 	// if (pThreshold2) {
+	// 	// 	if (effect2 < 0) color += -0.5;
+	// 	// 	else color += 0.5;
+	// 	// }
+	// 	// colors.push(color);
+	// 	// Check for genes with opposite signed effect scores.
+	// 	// if ((pThreshold1 && pThreshold2 && color === 0)) {
+	// 	// 	highlightedIndices.push(i);
+	// 	// } else if (
+	// 	// 	// (Math.sqrt(log10PValue1 * log10PValue1 + log10PValue2 * log10PValue2) > log10threshold && (Math.sign(effect1) === -Math.sign(effect2)))
+	// 	// 	(pValue1 < 2 * P_VALUE_THRESHOLD && pValue2 < 2 * P_VALUE_THRESHOLD && (Math.sign(effect1) === -Math.sign(effect2)))
+	// 	// ) {
+	// 	// 	partiallyHighlightedIndices.push(i);
+	// 	// }
+	// }
 	return {
 		genes,
 		genesLowerCase,
