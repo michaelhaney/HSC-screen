@@ -153,7 +153,7 @@ export async function getVolcanoCompareData(url1: string, url2: string) {
         // Fix gene name so only the first letter is capitalized.
         gene = gene[0].toUpperCase() + gene.slice(1).toLowerCase();
         genes2Hash[gene] = i;
-        if (genes1Hash[gene]) {
+        if (genes1Hash[gene] !== undefined) {
             genes.push(gene);
             genesLowerCase.push(gene.toLowerCase());
         }
