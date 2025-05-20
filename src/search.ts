@@ -1,6 +1,6 @@
 // TODO: https://getuikit.com/v2/docs/autocomplete.html
 
-import { volcanoPlotsCompare, volcanoPlots, volcanoPlotsExpression } from './globals';
+import { volcanoPlotsCompare, volcanoPlots } from './globals';
 
 const searchInput = document.getElementById('geneSearch') as HTMLInputElement;
 
@@ -16,7 +16,7 @@ export function searchGene(_gene?: string, searchBar?: boolean, mouseClick?: boo
 	if (!_gene || _gene.trim() === '') {
 		volcanoPlots.forEach(plot => plot.hideAnnotations());
 		volcanoPlotsCompare.forEach(plot => plot.hideAnnotations());
-		volcanoPlotsExpression.forEach(plot => plot.hideAnnotations());
+		// volcanoPlotsExpression.forEach(plot => plot.hideAnnotations());
 		// barPlot.hide();
 		// treePlot.hide();
 		return;
@@ -38,7 +38,7 @@ export function searchGene(_gene?: string, searchBar?: boolean, mouseClick?: boo
 
 	const values = volcanoPlots.map(plot => plot.annotateGene(gene));
 	volcanoPlotsCompare.forEach(plot => plot.annotateGene(gene));
-	volcanoPlotsExpression.forEach(plot => plot.annotateGene(gene));
+	// volcanoPlotsExpression.forEach(plot => plot.annotateGene(gene));
 	// barPlot.update(values, _gene);
 	// treePlot.update(values, _gene);
 }

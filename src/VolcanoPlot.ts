@@ -21,8 +21,9 @@ export class VolcanoPlot {
     protected genes?: string[];
     protected genesLowerCase?: string[];
     protected castleEffects?: number[];
-    protected castlePValues?: number[];
-    protected castlePValuesLog10?: number[];
+    protected castleScores?: number[];
+    // protected castlePValues?: number[];
+    // protected castlePValuesLog10?: number[];
     readonly initPromise: Promise<void>;
     protected $container = $('#volcanoPlots')!;
 
@@ -43,13 +44,15 @@ export class VolcanoPlot {
     protected async createPlot() {
         const { element, options } = this;
         const { url, title } = options;
-        const { genes, genesLowerCase, castleEffects, castlePValues, castlePValuesLog10 } =
+        const { genes, genesLowerCase, castleEffects, castleScores } =
             await getVolcanoData(url);
 
         this.genes = genes;
         this.genesLowerCase = genesLowerCase;
         this.castleEffects = castleEffects;
-        (this.castlePValues = castlePValues), (this.castlePValuesLog10 = castlePValuesLog10);
+        this.castleScores = castleScores;
+        // this.castlePValues = castlePValues; 
+        // this.castlePValuesLog10 = castlePValuesLog10;
 
         const data = [
             {
@@ -59,14 +62,14 @@ export class VolcanoPlot {
                     color: 'rgba(0,0,0,0.2)',
                 },
                 x: castleEffects,
-                y: castlePValuesLog10,
+                y: castleScores,
                 text: genes,
-                customdata: castlePValues,
+                // customdata: castlePValues,
                 ...HOVER_LAYOUT,
                 hovertemplate: `
 Gene: <b>%{text}</b><br>
-p-Value: <b>%{customdata:.3f}</b><br>
-Effect Score: <b>%{x:.2f}</b>
+Effect Score: <b>%{x:.2f}</b><br>
+Confidence Score: <b>%{y:.2f}</b>
 <extra></extra>`,
             },
         ];
@@ -82,8 +85,8 @@ Effect Score: <b>%{x:.2f}</b>
             yaxis: {
                 type: 'linear',
                 autorange: true,
-                dtick: 2,
-                title: '-log<sub>10</sub>(p-Value)',
+                dtick: 10,
+                title: 'Confidence Score',
                 fixedrange: true,
             },
             title: {
@@ -106,16 +109,15 @@ Effect Score: <b>%{x:.2f}</b>
     }
 
     annotateGene(gene: string) {
-        const { element, genes, genesLowerCase, castleEffects, castlePValues, castlePValuesLog10 } =
+        const { element, genes, genesLowerCase, castleEffects, castleScores } =
             this;
-        if (!genes || !genesLowerCase || !castleEffects || !castlePValues || !castlePValuesLog10) {
+        if (!genes || !genesLowerCase || !castleEffects || !castleScores) {
             console.log(
                 this,
                 genes,
                 genesLowerCase,
                 castleEffects,
-                castlePValues,
-                castlePValuesLog10
+                castleScores
             );
             throw new Error('Data missing.');
         }
@@ -133,8 +135,7 @@ Effect Score: <b>%{x:.2f}</b>
 
         const data = {
             castleEffect: castleEffects[geneIndex],
-            castlePValue: castlePValues[geneIndex],
-            castlePValueLog10: castlePValuesLog10[geneIndex],
+            castleScore: castleScores[geneIndex],
             name: this.options.title,
         };
 
@@ -143,7 +144,7 @@ Effect Score: <b>%{x:.2f}</b>
                 {
                     ...ANNOTATIONS_LAYOUT,
                     x: data.castleEffect,
-                    y: data.castlePValueLog10,
+                    y: data.castleScore,
                     text: genes[geneIndex],
                 },
             ],

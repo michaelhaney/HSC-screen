@@ -1,19 +1,19 @@
 import 'jquery';
 import './search';
-import { volcanoPlotsCompare, volcanoPlots, volcanoPlotsExpression } from './globals';
+import { volcanoPlotsCompare, volcanoPlots } from './globals';
 import { VolcanoPlot } from './VolcanoPlot';
 import { VolcanoPlotCompare } from './VolcanoPlotCompare';
 import { searchGene } from './search';
-import { VolcanoPlotExpression } from './VolcanoPlotExpression';
+// import { VolcanoPlotExpression } from './VolcanoPlotExpression';
 
 // Append current version.
 // $('#version').append(`Version ${require('../package.json').version}`);
 
 // Load data.
-const HSPC_vs_Tcell = './data/GW_HSPC_vs_Tcell.csv';
-const HSPC_vs_Bcell = './data/GW_HSPC_vs_Bcell.csv';
-const HSPC_vs_Myeloid = './data/GW_HSPC_vs_Myeloid.csv';
-const HSPC_vs_Erythroid = './data/GW_HSPC_vs_Erythroid.csv';
+const HSPC_vs_Tcell = './data/HSPC_v_T_cell.csv';
+const HSPC_vs_Bcell = './data/HSPC_v_B_cell.csv';
+const HSPC_vs_Myeloid = './data/HSPC_v_Myeloid.csv';
+const HSPC_vs_Erythroid = './data/HSPC_v_Erythroid.csv';
 // const HSPC_vs_Lymphoid = './data/ACOC_DTKP_GE_LymphoidvHSPC_1.csv';
 // const HSPC_vs_AllMyeloid = './data/ACOC_DTKP_GE_allMyloidvHSPC_1.csv';
 // const Expression_Data = './data/HSPCvTells_age_acc_rej.csv';
@@ -58,7 +58,7 @@ volcanoPlotsCompare.push(new VolcanoPlotCompare({
 const promises: Promise<void>[] = [];
 volcanoPlots.forEach(plot => promises.push(plot.initPromise));
 volcanoPlotsCompare.forEach(plot => promises.push(plot.initPromise));
-volcanoPlotsExpression.forEach(plot => promises.push(plot.initPromise));
+// volcanoPlotsExpression.forEach(plot => promises.push(plot.initPromise));
 
 async function initialSearch() {
 	await Promise.all(promises);
