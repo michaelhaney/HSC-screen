@@ -11,7 +11,7 @@ body {
 	width: 100%;
 	margin: auto;
     display: block;
-	image-rendering: pixelated;
+	/* image-rendering: pixelated; */
 }
 
 nav {
