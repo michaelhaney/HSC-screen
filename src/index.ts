@@ -10,13 +10,13 @@ import { VolcanoPlotExpression } from './VolcanoPlotExpression';
 // $('#version').append(`Version ${require('../package.json').version}`);
 
 // Load data.
-const HSPC_vs_Tcell = '../data/GW_HSPC_vs_Tcell.csv';
-const HSPC_vs_Bcell = '../data/GW_HSPC_vs_Bcell.csv';
-const HSPC_vs_Myeloid = '../data/GW_HSPC_vs_Myeloid.csv';
-const HSPC_vs_Erythroid = '../data/GW_HSPC_vs_Erythroid.csv';
-// const HSPC_vs_Lymphoid = '../data/ACOC_DTKP_GE_LymphoidvHSPC_1.csv';
-// const HSPC_vs_AllMyeloid = '../data/ACOC_DTKP_GE_allMyloidvHSPC_1.csv';
-// const Expression_Data = '../data/HSPCvTells_age_acc_rej.csv';
+const HSPC_vs_Tcell = './data/GW_HSPC_vs_Tcell.csv';
+const HSPC_vs_Bcell = './data/GW_HSPC_vs_Bcell.csv';
+const HSPC_vs_Myeloid = './data/GW_HSPC_vs_Myeloid.csv';
+const HSPC_vs_Erythroid = './data/GW_HSPC_vs_Erythroid.csv';
+// const HSPC_vs_Lymphoid = './data/ACOC_DTKP_GE_LymphoidvHSPC_1.csv';
+// const HSPC_vs_AllMyeloid = './data/ACOC_DTKP_GE_allMyloidvHSPC_1.csv';
+// const Expression_Data = './data/HSPCvTells_age_acc_rej.csv';
 
 volcanoPlots.push(new VolcanoPlot({ url: HSPC_vs_Bcell, title: 'HSPC vs Bcell' }));
 volcanoPlots.push(new VolcanoPlot({ url: HSPC_vs_Tcell, title: 'HSPC vs Tcell' }));
